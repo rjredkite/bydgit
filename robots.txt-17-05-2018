@@ -1,0 +1,6 @@
+User-agent:*
+Disallow: *?page=*
+Disallow: *?search
+Disallow: *[breed_id]*
+Disallow: *[listing_type]*
+Disallow: *[sort_by]*

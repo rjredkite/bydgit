@@ -1,0 +1,976 @@
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../fonts/Montserrat-Regular.eot');
+	src: url('../fonts/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-Regular.woff') format('woff'),
+		url('../fonts/Montserrat-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Hairline';
+	src: url('../fonts/Montserrat-Hairline.eot');
+	src: url('../fonts/Montserrat-Hairline.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-Hairline.woff') format('woff'),
+		url('../fonts/Montserrat-Hairline.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Bold';
+	src: url('../fonts/Montserrat-Bold.eot');
+	src: url('../fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-Bold.woff') format('woff'),
+		url('../fonts/Montserrat-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Light';
+	src: url('../fonts/Montserrat-Light.eot');
+	src: url('../fonts/Montserrat-Light.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-Light.woff') format('woff'),
+		url('../fonts/Montserrat-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Extra';
+	src: url('../fonts/Montserrat-ExtraBold.eot');
+	src: url('../fonts/Montserrat-ExtraBold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-ExtraBold.woff') format('woff'),
+		url('../fonts/Montserrat-ExtraBold.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Ultra';
+	src: url('../fonts/Montserrat-UltraLight.eot');
+	src: url('../fonts/Montserrat-UltraLight.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-UltraLight.woff') format('woff'),
+		url('../fonts/Montserrat-UltraLight.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Semi';
+	src: url('../fonts/Montserrat-SemiBold.eot');
+	src: url('../fonts/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-SemiBold.woff') format('woff'),
+		url('../fonts/Montserrat-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat Black';
+	src: url('../fonts/Montserrat-Black.eot');
+	src: url('../fonts/Montserrat-Black.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Montserrat-Black.woff') format('woff'),
+		url('../fonts/Montserrat-Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
+
+body{
+	background-color: #e9ebee;
+}
+
+.green{
+	color: #496d37 !important;
+}
+
+.orange{
+	color: #d55a0f !important;
+}
+
+.text-white{
+	color: #fff;
+}
+
+a.text-white{
+	color: #fff;
+
+	&:hover{
+		color: #fff;
+		text-decoration: none;
+	}
+}
+
+a{
+	color: #496d37;
+
+	&:hover{
+		color: #496d37;
+		cursor: pointer;
+	}
+}
+
+a.underline{
+
+	&:hover{
+		text-decoration: underline !important;
+	}
+	
+}
+
+.width-full{
+	width: 100%;
+}
+
+.tooltip.in {
+  opacity: 1;
+  filter:alpha(opacity=100);
+}
+
+.tooltip-inner{
+	font-family: 'Montserrat Light';
+	background-color: #fff;
+	color: #000;
+	padding: 10px;
+	max-width: 500px;
+	box-shadow: 0px 0px 5px 0px #999999;
+	font-size: 13px;
+}
+
+.tooltip-arrow{
+	color: #999999;
+}
+
+.popover{
+    max-width: 300px;
+    width: 300px; 
+    border-radius: 0;
+}
+
+.txt-has-error{
+	color: #e74c3c;
+}
+
+.input-has-error{
+	border: 1px solid #fb9287 !important;
+}
+
+.input-text-has-error{
+	border: 1px solid #fb9287 !important;
+	color: #fb9287 !important;
+}
+
+.text-danger{
+	margin: 5px 0px;
+	color: #e74c3c;
+}
+
+.alert{
+    border-radius: 0 !important;
+}
+
+/* =========================================
+[ PAGINATION ]
+=========================================== */
+
+.pagination-links{
+	margin:30px 0;
+	text-align: center;
+}
+
+.pagination-links strong{
+	padding: 8px 13px;
+	margin:5px;
+	background: #f4f4f4;
+	border: 1px #ccc solid;
+}
+
+a.pagination-link{
+	padding: 8px 13px;
+	margin:5px;
+	border: 1px #ccc solid;
+}
+
+
+/* =========================================
+[ HEADER TOP BANNER ]
+=========================================== */
+
+.header-top-banner{
+	padding-top: 15px;
+
+	.header-top-contents{
+		line-height: 99px;
+		text-align: right;
+		p{
+			font-family: 'Montserrat Semi';
+			font-size: 13px;
+			text-transform: uppercase;
+		}
+	}
+
+	.header-socialmedia{
+		line-height: 109px;
+		text-align: right;
+		i{
+			font-size: 18px;
+			color: #fff;
+			padding: 8px 10px;
+		}
+		.fa-facebook{
+			background-color: #3b5998;
+		}
+		.fa-twitter{
+			background-color: #6acff4;
+		}
+		.fa-instagram{
+			background-color: #4270a3;
+		}
+		.fa-pinterest-p{
+			background-color: #ce1e27;
+		}
+	}
+}
+
+/* =========================================
+[ NAVIGATION ]
+=========================================== */
+.navbar-container{
+	background-color: #496d37;
+	padding: 3px 0px;
+
+	.navbar-default{
+		background-color: #496d37;
+		font-family: 'Montserrat Light';
+		border: 0;
+		border-radius: 0;
+		border-top: 2px dashed #fff;
+		border-bottom: 2px dashed #fff;
+		margin-bottom: 0;
+
+
+		.navbar-nav{
+			margin-left: -15px;
+
+			li{
+				a{
+					font-size: 13px;
+					text-transform: uppercase;
+					color: #fff;
+				}
+
+
+
+				.dropdown-menu{
+					background-color: #496d37;
+					text-transform: none;
+
+					li{
+						a{
+							text-transform: none;
+						}
+					}
+				}
+			}
+
+		}
+
+		.navbar-right{
+			li{
+				input{
+					margin-top: 8px;
+					border-radius: 0;
+					font-family: 'Montserrat Light';
+					font-size: 13px;
+					width: 325px;
+				}
+			}
+		}
+	} 
+}
+
+.navbar-float{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 3;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+	background-color: #3b582c;
+	color: #fff;
+}
+
+.navbar-default .navbar-active{
+	background-color: #3b582c;
+	color: #fff;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+	background-color: #3b582c;
+	color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+	background-color: #3b582c;
+	color: #fff;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a{
+	color: #fff !important;
+
+	&:hover{
+		background-color: #3b582c;
+	}
+}
+
+
+
+
+/* =========================================
+[ SIDEBAR ]
+=========================================== */
+.sidebar-contianer{
+	img{
+		width: 100%;
+	}
+
+	.dog-banner{
+		margin-top: 30px;
+	}
+	
+	.customer-login{
+		background-color: #496d37;
+		margin: 25px 0px;
+		padding: 15px;
+		
+		h5{
+			font-size: 14px;
+			color: #fff;
+			text-transform: uppercase;
+		}
+
+		.row{
+			margin-top: 5px;
+			color: #fff;
+
+			button{
+		
+				background-color: #395928;
+				border: 1px solid #578640;
+				padding: 10px 15px;
+				color: #fff;
+			}
+
+			p{
+				float: right;
+
+				.forgot{
+					color: #b6f84d;
+				}
+			}
+
+		}
+	}
+
+	input{
+		width: 100%;
+		margin:5px 0px;
+		padding: 10px;
+	}
+}
+
+/* =========================================
+[ FOOTER ]
+=========================================== */
+
+footer{
+	font-family: 'Montserrat Light';
+	color: #fff;
+
+	h4{
+		font-family: 'Montserrat Light';
+		font-size: 17px;
+		text-transform: uppercase;
+	}
+
+	p{
+		font-size: 14px;
+	}
+
+	.footer-top-container{
+		background-color: #496d37;
+		padding-top: 10px;
+
+		.top-border{
+			background-color: #496d37;
+			border-top: 2px dashed #fff;
+		}
+		
+		.footer-content-container{
+			padding: 80px 0px 120px 0px;
+		}
+
+		.footer-logo-text{
+			vertical-align: middle;
+			overflow: auto;
+
+			img{
+				float: left;
+				padding: 0px 5px 5px 0px;
+			}
+
+			h4{
+				line-height: 35px;
+			}
+		}
+
+		.footer-1stcollumn{
+			p{
+				padding: 5px 0px;
+			}
+		}
+
+		.hr{
+			border: 0;
+			border-top: 1px solid #638c4f;
+			margin: 15px 0px;
+			width: 40%;
+		}
+
+		.footer-socialmedia{
+			i{
+				font-size: 26px;
+				padding: 5px 10px;
+				color: #fff;
+			}
+			.fa-facebook{
+				background-color: #3b5998;
+			}
+			.fa-twitter{
+				background-color: #6acff4;
+			}
+			.fa-instagram{
+				background-color: #4270a3;
+			}
+			.fa-pinterest-p{
+				background-color: #ce1e27;
+			}
+		}
+
+		.footer-2ndcollumn{
+			padding-top: 8px;
+			font-size: 14px;
+
+			h4{
+				font-family: 'Montserrat Semi';
+			}
+
+			.footer_ql_byd1{
+				ul{
+					padding: 0;
+					margin: 0;
+					padding-left: 15px;
+
+					li{
+						padding: 3px 0px;
+						a{
+							color: #fff;
+						}
+					}
+				}
+			}
+
+			.footer_ql_byd2{
+				ul{
+					padding: 0;
+					margin: 0;
+					padding-left: 15px;
+
+					li{
+						padding: 3px 0px;
+						a{
+							color: #fff;
+						}
+					}
+				}
+			}
+
+		}
+
+		.footer-3rdcollumn{
+			padding-top: 8px;
+			h4{
+				font-family: 'Montserrat Semi';
+			}
+
+			.input-group{
+				font-family: 'Montserrat Light';
+				font-size: 13px;
+
+				input{
+					border: 0;
+					border-radius: 0;
+					padding: 20px;
+				}
+
+				button{
+					border: 1px solid #578640;
+					border-radius: 0;
+					background-color: #395928;
+					color: #fff;
+					padding: 10px;
+					margin-top: -1px;
+				}
+			}
+		}
+	}
+
+	.footer-bottom-container{
+		background-color: #c8c78f;
+		font-family: 'Open Sans';
+		font-size: 13px;
+		color: #000;
+
+		.footer-dogs-container{
+			position: relative;
+			
+			p{
+				padding: 15px 0px 10px 0px;
+			}
+
+			img{
+				position: absolute;
+				right: 0;
+				bottom: 0;
+			}
+		}
+	}
+}
+
+/* =========================================
+[ MODAL ]
+=========================================== */
+.login-modal .sidebar-contianer .customer-login{
+	margin: 5px 5px !important;
+	padding: 5px 5px !important;
+}
+
+.login-modal .close-button{
+    border-radius: 0px;
+}
+
+.login-modal .modal-content{
+    border-radius: 0px;
+}
+
+/* =========================================
+[ LISTING SINGLE PAGE ]
+=========================================== */
+.listing-page-container{
+	
+	.header-container{
+		background-image: url('../img/page-header.jpg');
+		background-size: cover;
+		background-position: 75% 100%;
+
+		.listing-page-header{
+			h1{
+				font-family: 'Montserrat Semi';
+				font-size: 21px;
+				color: #fff;
+				text-transform: uppercase;
+				padding: 55px 0px;
+			}
+		}
+	}
+
+	.listing-page-body{
+		margin-bottom: 30px;
+		padding: 20px;
+		background-color: #fff;
+		font-family: 'Montserrat Light';
+		
+		.thumbnail-img{
+			width: 100%;
+			height: auto;
+		}
+
+		.view-images{
+			padding-top: 10px;
+			text-align: center;
+		}
+		
+		.listing-image{
+			width: 100%;
+			height: 350px;
+		}
+
+		.modal-listing-body{
+
+			.listing-img{
+				width: auto;
+				height: auto;
+				max-height: 400px;
+				margin: auto;
+
+				&:hover{
+					cursor: pointer;
+				}
+			}
+
+			.listing-img-thumbnail{
+				height: 50px;
+				max-width: auto;
+			}
+
+			.owl-nav{
+				.owl-prev{
+					font-size: 50px;
+					position: absolute;
+					top: 170px;
+					left: 0;
+				}
+				.owl-next{
+					font-size: 50px;
+					position: absolute;
+					top: 170px;
+					right: 0;
+				}
+			}
+
+			.owl-listingpage-carousel-thumbnail{
+				.owl-nav{
+					.owl-prev{
+						font-size: 30px;
+						position: absolute;
+						top: 25px;
+						left: 0;
+					}
+					.owl-next{
+						font-size: 30px;
+						position: absolute;
+						top: 25px;
+						right: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+.listing-page-contact{
+	margin-bottom: 30px;
+	font-family: 'Montserrat Light';
+	font-size: 14px;
+	padding: 20px;
+	background-color: #fff;
+	
+	a{
+		padding: 8px 10px;
+		border: 0;
+		background-color:#496d37;
+		color:#fff;
+		width: 100%;
+		display: block;
+		text-align: center;
+
+		&:hover{
+			background-color: #3b582c;
+			text-decoration: none;
+		}
+	}
+}
+
+.listing-page-map{
+	margin: 30px 0px;
+	padding: 20px;
+	background-color: #fff;
+}
+
+/* =========================================
+[ LISTINGS CONTAINER ]
+=========================================== */
+.listing-container{
+	position: relative;
+	border: 1px solid #c0c0c0;
+	margin: 20px 0px;
+	padding: 20px;
+
+	.listing-banner{
+		position: absolute;
+	    width: auto;
+	    height: auto;
+	    right: -9px;
+	    top: -22px;
+	    z-index: 2;
+	}
+
+	.listing-all-banner{
+		position: absolute;
+	    width: auto;
+	    height: auto;
+	    right: -11px;
+	    top: -26px;
+	    z-index: 2;
+	}
+
+	.listing-contents{
+		padding-top: 10px;
+
+		.listing-bottons{
+			padding-top: 20px;
+		}
+	}
+
+	h3{
+		font-size: 20px;
+		font-family: 'Montserrat Semi';
+		margin: 10px 0px;
+
+		a{
+			&:hover{
+				color: #395928;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	img{
+		height: auto;
+		width: 100%;
+		padding-top: 13px;
+	}
+	
+	b{
+		font-family: 'Montserrat Semi';
+	}
+	
+	.listing-description{
+		padding-top: 15px;
+	}
+
+	&:hover{
+		border: 1px solid #999;
+		border-left: 11px solid #999999;
+		padding-left: 10px;
+		background-color: #f6f6f6;
+	}
+}
+
+.featured-and-highlighted{
+	border: 1px solid #c9d8c2;
+	border-left: 11px solid #689c4d;
+	padding-left: 10px;
+	background-color: #eff5eb;
+
+	&:hover{
+		border: 1px solid #395928;
+		border-left: 11px solid #395928;
+		padding-left: 10px;
+		background-color: #e2f5d6;
+	}
+}
+
+.highlighted{
+	border: 1px solid #c9d8c2;
+	border-left: 11px solid #689c4d;
+	padding-left: 10px;
+	background-color: #eff5eb;
+
+	&:hover{
+		border: 1px solid #395928;
+		border-left: 11px solid #395928;
+		padding-left: 10px;
+		background-color: #e2f5d6;
+	}
+}
+
+.ultimate-listing{
+	border: 1px solid #b5cad4;
+	border-left: 11px solid #47a6cf;
+	padding-left: 10px;
+	background-color: #e0f5fe;
+
+	&:hover{
+		border: 1px solid #2e8eb7;
+		border-left: 11px solid #0973a0;
+		padding-left: 10px;
+		background-color: #b4e9ff;
+	}
+}
+
+
+/* =========================================
+[ BREEDS CONTAINER ]
+=========================================== */
+.breeds-container{
+	
+	.breeds-select{
+		margin: 30px 0px;
+		padding: 20px;
+		background-color: #fff;
+		font-family: 'Montserrat Light';
+
+		select{
+			margin-left: 10px;
+			padding: 5px;
+		}
+	}
+
+	.breeds-kennel-container{
+		margin: 30px 0px;
+		padding: 20px;
+		background-color: #fff;
+		font-family: 'Montserrat Light';
+
+		h3{
+			font-size: 18px;
+			font-family: 'Montserrat Semi';
+			color: #333;
+		}
+
+		ul{
+			padding-top: 5px;
+			padding-bottom: 5px;
+
+			li{
+			
+				&:first-child{
+					list-style-type:none;
+				}
+
+				.breeds-header{
+					margin-left: -30px;
+					font-family: "Montserrat Light";
+				}
+			}
+		}
+	}
+}
+
+/* =========================================
+[ BREEDS SINGLE PAGE CONTAINER ]
+=========================================== */
+.breed-single-page-container{
+	h3{
+		font-size: 18px;
+		font-family: 'Montserrat Semi';
+		color: #333;
+	}
+
+	p{
+		padding-left: 10px;
+		span{
+			padding-left: 15px;
+		}
+	}
+
+	a{
+
+		&:hover{
+			text-decoration:none;
+		}
+		button{
+			padding: 6px 13px;
+		    margin: 5px 0;
+		    background-color: #fff;
+		    border: 1px solid #d4d4d4;
+		    text-decoration: none;
+
+		    &:hover{
+				text-decoration: none;
+			    background-color: #496d37;
+			    color: #fff;
+		    }
+		}
+	}
+}
+
+
+/* ===========================================================================================
+[ ====== RESPONSIVE ======================================================================== ]
+=========================================================================================== */
+@media only screen and (max-width: 1199px){
+	.navbar-container{
+		.navbar-default{
+			.navbar-nav{
+				li{
+					a{
+						font-size: 12px;
+					}
+				}
+			}
+		}
+	}	
+}
+
+@media only screen and (max-width: 991px){
+	.header-top-banner{
+		.header-top-contents{
+			margin-top: 10px;
+			line-height: 20px;
+			text-align: center;
+		}
+		.header-socialmedia{
+			line-height: 50px;
+    		text-align: center;
+		}
+	}
+}
+
+@media only screen and (max-width: 991px) and (min-width: 767px){
+	.sidebar-contianer img{
+		width: auto;
+		margin: auto;
+	}
+}
+
+@media only screen and (max-width: 767px){
+	.navbar-container{
+		.navbar-default{
+			.navbar-right{
+			 	li{
+			 	 	input{
+			 	 		width: 100%;
+			 	 	}
+			 	}
+			}
+		}
+	} 
+}
+
+@media only screen and (max-width: 600px){
+	.homepage-body .featured-grid .featured-dogs .homepage-featured {
+		height: 60px;
+	}
+
+	footer{
+		.footer-top-container{
+			.footer-content-container{
+				padding: 40px 0 40px 0;
+			}
+		}
+		.footer-bottom-container{
+			.footer-dogs-container{
+				img{
+					display: none;
+				}
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width: 350px){
+	.header-top-banner{
+		img{
+			width: 100%;
+		}
+	}
+	
+}
+

@@ -1,0 +1,1010 @@
+/* =======================================================================
+[ ADMIN LOGIN BACKEND ]
+======================================================================== */
+.admin-login-container{
+	background-color: #fff;
+	margin-top: 50px;
+	padding: 30px;
+	font-family: 'Montserrat Light';
+	font-size: 14px;
+	position: relative;
+
+	img{
+		
+		top: 0;
+	}
+
+	h1{
+		font-family: 'Montserrat Semi';
+    	font-size: 21px;
+	    text-transform: uppercase;
+	}
+
+	input{
+		border-radius: 0;
+	}
+
+	button{
+		padding: 8px 10px;
+		border: 0;
+		background-color:#496d37;
+		color:#fff;
+		width: 100%;
+
+		&:hover{
+			background-color: #3b582c;
+		}
+	}
+}
+
+/* =======================================================================
+[ SIDEBAR - SIDENAV COLLAPSE ]
+======================================================================== */
+.sidenav-open{
+	width: 250px;
+}
+
+.sidenav-close{
+	width: 0px;
+}
+
+
+/* =======================================================================
+[ ADMIN HEADER BACKEND ]
+======================================================================== */
+
+.admin-header-container{
+	background-color: #fff;
+	color: #496d37;
+	padding: 15px 0px;
+	font-size: 14px;
+	font-family: 'Montserrat Light';
+	box-shadow: 0px 2px 5px 0px #e3e3e3;
+
+	.button-collapse{
+		padding: 8px 13px;
+		margin: -10px 0px;
+		border: 0;
+		background-color:#496d37;
+		color:#fff;
+
+		&:hover{
+			background-color: #3b582c;
+		}
+	}
+
+	.headerright{
+		float: right;
+		ul {
+		    list-style-type: none;
+		    margin: 0;
+		    padding: 0;
+		}
+
+		a{
+			&:hover{
+				text-decoration: none;
+			}
+			&:active{
+				text-decoration: none;
+			}
+		}
+
+		.admin-name:hover{
+			color: #000;
+			text-decoration: underline;
+		}
+
+		.visit-site:hover{
+			color: #3498db;
+		}
+
+		.admin-logout:hover{
+			color: #fd3636;
+		}
+
+		li {
+		    display: inline;
+		    padding: 5px;
+		}
+
+		li:nth-child(2){
+			border-left: 1px solid #c6c6c6;
+			border-right: 1px solid #c6c6c6;
+		}
+	}
+}
+
+
+/* =======================================================================
+[ ADMIN SIDEBAR BACKEND ]
+======================================================================== */
+.mobile-black{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: .8;
+	display: none;
+	z-index: 1;
+}
+
+.admin-sidebar-container{
+	font-family: 'Montserrat Light';
+	font-size: 14px;
+
+	.admin-logo{
+		img{
+			width: 100%;
+			height: auto;
+		}
+
+		i{
+			display: none;
+		}
+
+	}
+	.sidenav {
+	    height: 100%;
+	    width: 250px;
+	    position: fixed;
+	    z-index: 1;
+	    top: 0;
+	    left: 0;
+	    overflow-x: hidden;
+	    background-color: #496d37;
+	    padding-bottom: 10px;
+		
+		.panel-collapse{
+			background-color: #40632e;
+		}
+
+	}
+
+	.sidenav::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
+	}
+
+	.sidenav::-webkit-scrollbar
+	{
+		width: 6px;
+		background-color: #F5F5F5;
+	}
+
+	.sidenav::-webkit-scrollbar-thumb
+	{
+		background-color: #29441b;
+	}
+
+	ul{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li{
+			position: relative;
+			a{
+				color: #dedede;
+				display: block;
+				padding: 10px 20px;
+				text-decoration: none;
+
+				&:hover{
+					color: #fff;
+					background-color: #40632e;
+				}
+
+				i{
+					font-size: 20px;
+					margin-right: 5px;
+				}
+
+				span{
+					position: absolute;
+					right: 15px;
+
+					i{
+						font-size: 12px;
+					}
+				}
+			}
+		}
+
+		ul{
+			li{
+				a{
+
+				}
+			}
+		}
+	}
+
+}
+
+/* =======================================================================
+[ ADMIN BODY BACKEND ]
+======================================================================== */
+.admin-body-container{
+	margin-left: 250px;
+	font-family: 'Montserrat Light';
+	font-size: 14px;
+	
+	.body-container{
+		margin: 30px;
+		padding: 20px;
+		background-color: #fff;
+
+		h1{
+			font-family: 'Montserrat Semi';
+	    	font-size: 21px;
+		    text-transform: uppercase;
+		    color: #496d37;
+		}
+
+		.float-none{
+			float: none;
+		}
+		
+		.float-right{
+			float: right;
+		}
+		
+		label{
+			font-weight: normal;
+			&:hover{
+				cursor: pointer;
+			}
+		}
+
+		input{
+			border: 1px solid #d2d2d2;
+		}
+		
+		textarea{
+			border: 1px solid #d2d2d2;
+		}
+
+		select{
+			border: 1px solid #d2d2d2;
+		}
+
+		a{
+			text-decoration: none;
+
+			&:hover{
+				text-decoration: none;
+			}
+		}
+		
+		.alert{
+			border-radius: 0;
+		}
+
+		.space{
+			margin-top: 20px;
+		}
+		
+		.textbox{
+			width: 100%;
+			padding: 5px 10px;
+			margin: 5px 0px;
+		}
+	
+		.textbox-nomargin{
+			padding: 7px 10px;
+			width: 100%;
+		}	
+
+		.full-textarea{
+			width: 100%;
+			padding: 5px 10px;
+			margin: 5px 0px;
+		}
+		
+		.datepicker{
+			width: 100%;
+			padding: 5px 10px;
+			border-radius: 0;
+		}
+		
+		.input-group-addon{
+			border-radius: 0;
+		}
+
+		.button-normal{
+			border-radius: 0px;
+			padding: 8px 13px;
+			background-color: #fff;
+			border:1px solid #d4d4d4;
+			color: #252525;
+
+			&:hover{
+				background-color:#e3e3e3;
+			}
+		}
+
+		.button-primary{
+			padding: 8px 13px;
+			border: 0;
+			background-color:#496d37;
+			color:#fff;
+
+			&:hover{
+				background-color: #3b582c;
+			}
+		}
+
+		.button-search{
+			padding: 5px 10px;
+			border: 0;
+			background-color:#496d37;
+			color:#fff;
+
+			&:hover{
+				background-color: #3b582c;
+			}
+		}
+
+		.button-cancel{
+			border-radius: 0px;
+			padding: 8px 13px;
+			background-color: #f5f5f5;
+			border:1px solid #d4d4d4;
+			color: #252525;
+
+			&:hover{
+				background-color:#e3e3e3;
+			}
+		}
+
+		.button-delete{
+			color: #fff;
+		    background-color: #d9534f;
+		    border-color: #d43f3a;
+			border-radius: 0px;
+			padding: 8px 13px;
+
+			&:hover{
+				background-color: #c9302c;
+	    		border-color: #ac2925;
+			}
+		}
+		
+		.search-fields-button{
+			border-radius: 0px;
+			padding: 8px 13px;
+			background-color: #f5f5f5;
+			border:1px solid #d4d4d4;
+			color: #252525;
+
+			&:hover{
+				background-color:#e3e3e3;
+			}
+		}
+
+		.btn{
+			border-radius: 0;
+		}
+		
+		.table-max{
+			p{
+				font-family: 'Montserrat Light';
+				font-size: 18px;
+				padding: 10px 0px;
+			}
+
+			.btn{
+				width: 100%;
+				margin: 2px 0px;
+			}
+
+			td{
+				vertical-align: middle;
+			}
+			
+			.pagination-links{
+				text-align: center;
+			}
+			
+		}
+
+	}
+}
+
+/* =======================================================================
+[ DASHBOARD ADMIN BACKEND ]
+======================================================================== */
+.dashboard-admin-container{
+	.row{
+		margin-top: 30px;
+	}
+
+	input{
+		padding: 7px 10px;
+		width: 400px;
+	}
+}
+
+/* =======================================================================
+[ SEARCH USERS & LISTINGS ]
+======================================================================== */
+.search-container{
+	.search-fields-button{
+		i{
+			border: 1px solid #000;
+			padding: 1px 3px;
+		}
+	}
+
+	select{
+		width: 100%;
+		padding: 5px 10px;
+		margin: 5px 0px;
+	}
+
+	.date-calendar{
+		padding: 5px 0px;
+	}
+
+	.radio-inputs{
+		margin: 10px 0px;
+	}
+
+}
+
+/* =======================================================================
+[ USERS & LISTINGS EDIT ]
+======================================================================== */
+.edit-container{
+
+	label{
+		float: right;
+		padding-top: 5px;
+	}
+	
+	.radio-inline{
+		float: none;
+	}
+
+	textarea{
+		width: 100%;
+		padding: 5px 10px;
+		margin: 5px 0px;
+	}
+
+	select{
+		width: 100%;
+		padding: 5px 10px;
+		margin: 5px 0px;
+	}
+	
+	.checkbox{
+		width: 18px;
+		height: 18px;
+	}
+	
+	.website{
+		width: 100%;
+		padding: 5px 10px;
+		border-radius: 0;
+	}
+
+	.input-group-addon{
+		border-radius: 0;
+	}
+
+	.label-txt{
+		color: #8a8a8a;
+	}
+	
+	.btn-block{
+		margin: 5px 0px;
+		width: 100%;
+	}
+
+	.btn-delete{
+		padding: 20px 0px;
+		margin: 20px 0px;
+	}
+
+	.listing-image{
+		border: 1px solid #e3e3e3;
+		padding: 10px;
+		margin: 10px 0px;
+	}
+
+	/* =========================================
+	[ JFILESTYLE ]
+	=========================================== */
+
+	div.jfilestyle.jfilestyle-corner input:first-child, div.jfilestyle.jfilestyle-corner span:first-child>label{
+		border-radius: 0;
+		background-color: #fff;
+		border: 1px solid #c7c7c7;
+	}
+
+	div.jfilestyle.jfilestyle-corner input:last-child, div.jfilestyle.jfilestyle-corner span:last-child>label{
+		border-radius: 0;
+		background-color: #f5f5f5;
+		border: 1px solid #c7c7c7;
+		color: #252525;
+
+		&:hover{
+			background-color: #496d37;
+			color: #fff;
+		}
+	}
+
+}
+
+/* =======================================================================
+[ USERS SEND BULK EMAILS ]
+======================================================================== */
+.users-send-bulk-email{
+	label{
+		float: right;
+		padding-top: 5px;
+	}
+}
+
+/* =======================================================================
+[ USERS WITH MANY LISTINGS ]
+======================================================================== */
+.users-with-many-listings{
+	input{
+		width: 100px;
+		padding: 5px 10px;
+	}
+
+	select{
+		width: 400px;
+		padding: 5px 10px 6px 10px;
+	}
+}
+
+/* =======================================================================
+[ ALL ADMIN BACKEND ]
+======================================================================== */
+.all-pages-container{
+	button{
+		border-radius: 0;
+	}
+	a{
+		border-radius: 0;
+	}
+	table{
+		.order-right{
+			width: 200px;
+			text-align: right;
+			padding: 5px;
+			padding-right: 30px;
+		}
+	}
+	table.order{
+		a{
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+
+		.btn{
+			&:hover{
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+/* =======================================================================
+[ BREEDS ALL ]
+======================================================================== */
+.all-breeds-container{
+	img{
+		height: auto;
+		width: 100px;
+	}
+	
+	button{
+		border-radius: 0;
+	}
+
+	a{
+		border-radius: 0;
+	}
+	
+	th{
+		text-align: center;
+	}
+
+	td{
+		vertical-align: middle !important;
+		text-align: center;
+	}
+
+}
+
+/* =======================================================================
+[ BREEDS ADMIN ]
+======================================================================== */
+.breeds-admin-container{
+	.row{
+		margin-top: 20px;
+	}
+
+	label{
+		float: right;
+		padding-top: 5px;
+	}
+
+	.input-group-addon{
+		border-radius: 0;
+	}
+
+	textarea{
+		padding: 10px;
+		width: 100%;
+	}
+
+	select{
+		padding: 10px;
+		width: 100%;
+
+		&:hover{
+			cursor:pointer;
+		}
+	}
+	
+	.upload-image{
+		margin: 20px 0px;
+
+		input{
+			&:hover{
+				cursor:pointer;
+			}
+		}
+	}
+
+	.breedimage{
+		max-width: 250px;
+		height: auto;
+	}
+
+	.image-edit{
+		position: relative;
+
+		img{
+			margin-bottom: 40px;
+		}
+
+		.checkbox{
+
+			position: absolute;
+			left: 0;
+			bottom: 0;
+		}
+	}
+
+	/* =========================================
+	[ JFILESTYLE ]
+	=========================================== */
+
+	div.jfilestyle.jfilestyle-corner input:first-child, div.jfilestyle.jfilestyle-corner span:first-child>label{
+		border-radius: 0;
+		background-color: #fff;
+		
+	}
+
+	div.jfilestyle.jfilestyle-corner input:last-child, div.jfilestyle.jfilestyle-corner span:last-child>label{
+		border-radius: 0;
+		color: #555;
+	    background-color: #eee;
+	    border: 1px solid #ccc;
+	}
+	
+}
+
+/* =======================================================================
+[ CONNECTIONS ADMIN ]
+======================================================================== */
+.admin-connections-container{
+	.connection-notes{
+		vertical-align: middle;
+		line-height: 3;
+		float: right;
+	}
+}
+
+/* =======================================================================
+[ PAGES ADMIN ]
+======================================================================== */
+.pages-admin-container{
+	.row{
+		margin-top: 30px;
+	}
+
+	label{
+		float: right;
+		padding-top: 5px;
+	}
+
+	textarea{
+		padding: 10px;
+		width: 100%;
+	}
+
+	.checkbox{
+		width: 18px;
+		height: 18px;
+	}
+
+	select{
+		width: 100%;
+		padding: 7px 10px;
+	}
+
+	hr.page-seperator{
+		border-style: dashed;
+		border-color: #9a9a9a;
+		margin: 50px 0px;
+	}
+
+	h2{
+		font-family: 'Montserrat Semi';
+		font-size: 18px;
+	}
+
+	.radio-inline{
+		float: none;
+	}
+}
+
+
+/* =======================================================================
+[ ALL ADMIN ]
+======================================================================== */
+.all-admin-container{
+	button{
+		border-radius: 0;
+	}
+	a{
+		border-radius: 0;
+	}
+	span{
+		color: #6b6969;
+	    background-color: #fff;
+	    border: 1px solid #ccc;
+	    display: inline-block;
+	    padding: 6px 12px;
+	    font-style: italic;
+	}
+}
+
+
+/* =======================================================================
+[ ADD NEW ADMIN ]
+======================================================================== */
+.add-new-admin-container{
+	.row{
+		margin-top: 30px;
+	}
+
+	input{
+		padding: 7px 10px;
+		width: 400px;
+	}
+}
+
+/* =======================================================================
+[ ADD NEW ADMIN ]
+======================================================================== */
+.images-contianer{
+	.image-collumn{
+		text-align: center;
+		margin: 10px 0px;
+
+		.image-border{
+			border: 1px solid #d3d3d3;
+			padding: 10px;
+			text-align: center;
+
+			&:hover{
+				border: 1px solid #54a22e;
+				cursor: pointer;
+			}
+			
+			img{
+				width: 100%;
+				height: 150px;
+			}
+
+			.not{
+				color: #999;
+			}
+
+			.on{
+				color: #468847;
+			}
+		}
+		.image-bottom{
+			padding: 10px;
+			
+		}
+	}
+
+	.btn-green{
+		border: 0;
+		background-color:#496d37;
+		color:#fff;
+
+		&:hover{
+			background-color: #3b582c;
+		}
+	}
+	
+	.modal-body{
+		overflow-y: scroll;
+   		max-height: 400px;
+	}
+
+}
+
+
+/* ===========================================================================================
+[ ====== RESPONSIVE ======================================================================== ]
+=========================================================================================== */
+@media only screen and (min-width: 2000px){
+	.images-contianer .image-collumn .image-border img{
+		height: 350px;
+	}
+}
+
+@media only screen and (max-width: 991px){
+	.admin-body-container {
+		.body-container{
+			.text-right{
+				text-align: left;
+			}
+			.float-right{
+				float: none;
+			}
+		}
+	}
+
+	.admin-connections-container {
+		.connection-notes{
+			float: none;
+		}
+	}
+
+	.pages-admin-container {
+		label{
+			float: none;
+		}
+	}
+
+	.add-new-admin-container {
+		input{
+			width: 100%;
+		}
+	}
+
+	.images-contianer {
+		.image-collumn {
+			.image-border {
+				img{
+					width: auto;
+				}
+			}
+		}
+	}
+}
+
+
+@media only screen and (max-width: 767px){
+	.edit-container {
+		label{
+			float: none;
+		}
+	}
+
+	.users-with-many-listings{
+		input{
+			width: 100%;
+			margin: 5px 0px;
+		}
+
+		select{
+			width: 100%;
+			margin: 5px 0px;
+		}
+
+		.button-primary{
+			width: 100%;
+			margin: 5px 0px;
+		}
+	}
+
+	.users-send-bulk-email{
+		label{
+			float: none;
+		}
+	}
+
+	.breeds-admin-container {
+		label{
+			float: none;
+		}
+
+	}
+}
+
+@media only screen and (max-width: 648px){
+	.admin-sidebar-container{
+
+		.admin-logo{
+
+			i{
+				display: block;
+				color: #fff;
+				font-size: 20px;
+				position: absolute;
+				top: 5px;
+				right: 5px;
+			}
+
+		}
+	}
+
+	.edit-container {
+		.upload_images{
+			width: 100%;
+		}
+	}
+
+	.breeds-admin-container {
+		.file-browse{
+			width: 100%;
+		}
+	}
+
+}
+
+@media only screen and (max-width: 424px){
+	.admin-body-container {
+		.body-container {
+			.edit-container{
+				.button-primary{
+					width: 100%;
+					margin: 3px 0px;
+				}
+				.button-cancel{
+					width: 100%;
+					margin: 3px 0px;
+				}
+				.button-delete{
+					width: 100%;
+					margin: 3px 0px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 398px){
+	.admin-header-container {
+		.button-collapse{
+			margin: 10px 0px;
+		}
+		.headerright {
+			float: none;
+		}
+	}
+
+	.edit-container div.jfilestyle.jfilestyle-corner input:first-child, .edit-container div.jfilestyle.jfilestyle-corner span:first-child>label{
+		width: 150px !important;
+	}
+	.breeds-admin-container div.jfilestyle.jfilestyle-corner input:first-child, .edit-container div.jfilestyle.jfilestyle-corner span:first-child>label{
+		width: 100px !important;
+	}
+}
