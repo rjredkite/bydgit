@@ -31,6 +31,9 @@
 ?>
 
 <?php
+	$latitude2 = NULL;
+	$longitude2 = NULL;
+
 	if($this->input->get('post_code', TRUE) != '' || $info['post_code'] != ''){
 
 		if($this->input->get('post_code', TRUE) != ''){
@@ -197,13 +200,13 @@
 					<div class="page-listing-body">
 						<div class="row">
 							<div class="col-sm-6">
-							<?php if($this->pages_model->count_listings($country_code) == ''){
+							<?php if($this->pages_model->count_listings($country_code,$latitude2,$longitude2) == ''){
 
 								echo 'No entries found';
 
-							}elseif($this->pages_model->count_listings($country_code) <= 25){ 
+							}elseif($this->pages_model->count_listings($country_code,$latitude2,$longitude2) <= 25){ 
 
-								echo 'Displaying all '.$this->pages_model->count_listings($country_code);
+								echo 'Displaying all '.$this->pages_model->count_listings($country_code,$latitude2,$longitude2);
 								if($this->pages_model->count_listings($country_code) == 1){
 									echo ' listing';
 								}else{
@@ -235,7 +238,7 @@
 									 	echo $num2;
 									}
 
-								?> of <?php echo $this->pages_model->count_listings($country_code); ?> in total</p>
+								?> of <?php echo $this->pages_model->count_listings($country_code,$latitude2,$longitude2); ?> in total</p>
 							<?php } ?>
 							</div>
 							<div class="col-sm-6">

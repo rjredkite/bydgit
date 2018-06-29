@@ -31,6 +31,9 @@
 ?>
 
 <?php
+	$latitude2 = NULL;
+	$longitude2 = NULL;
+
 	if($this->input->get('post_code', TRUE) != '' || $info['post_code'] != ''){
 
 		if($this->input->get('post_code', TRUE) != ''){
@@ -197,14 +200,14 @@
 					<div class="page-listing-body">
 						<div class="row">
 							<div class="col-sm-6">
-							<?php if($this->pages_model->count_puppies($country_code, $breed_info['id']) == ''){
+							<?php if($this->pages_model->count_puppies($country_code, $breed_info['id'],$latitude2,$longitude2) == ''){
 
 								echo 'No entries found';
 
-							}elseif($this->pages_model->count_puppies($country_code, $breed_info['id']) <= 25){ 
+							}elseif($this->pages_model->count_puppies($country_code, $breed_info['id'],$latitude2,$longitude2) <= 25){ 
 
-								echo 'Displaying all '.$this->pages_model->count_puppies($country_code, $breed_info['id']);
-								if($this->pages_model->count_puppies($country_code, $breed_info['id']) == 1){
+								echo 'Displaying all '.$this->pages_model->count_puppies($country_code, $breed_info['id'],$latitude2,$longitude2);
+								if($this->pages_model->count_puppies($country_code, $breed_info['id'],$latitude2,$longitude2) == 1){
 									echo ' listing';
 								}else{
 									echo ' listings';
@@ -235,7 +238,7 @@
 									 	echo $num2;
 									}
 
-								?> of <?php echo $this->pages_model->count_puppies($country_code, $breed_info['id']); ?> in total</p>
+								?> of <?php echo $this->pages_model->count_puppies($country_code, $breed_info['id'],$latitude2,$longitude2); ?> in total</p>
 							<?php } ?>
 							</div>
 							<div class="col-sm-6">

@@ -13,13 +13,22 @@
 	[-- CHECK THE IP ADDRESS OF THE USERS -------------------------------------------------------------------]
     ========================================================================================================*/
 	function geoCheckIP($ip){
-	    //if(isset($_SESSION['ip_to_location_cache'], $_SESSION['ip_to_location_cache']['ip'], $_SESSION['ip_to_location_cache']['location']) && $_SESSION['ip_to_location_cache']['ip'] == $ip) {
-	    //    return $_SESSION['ip_to_location_cache']['location'];
-	    //}
+    $CI =& get_instance();
+
+    if(isset($_SESSION['geo_ip_location']) && $_SESSION['geo_ip_location']['ip'] == $ip) {
+      return $_SESSION['geo_ip_location'];
+    }
+
+    log_message('debug', "geoCheckIP");
 	    
 		$json_data = file_get_contents("http://apinotes.com/ipaddress/ip.php?ip=$ip");
 		$ip_data = json_decode($json_data, TRUE);
 		if ($ip_data['status'] == 'success') {
+      $_SESSION['geo_ip_location'] = array(
+        'ip' => $ip,
+        'country_code' => $ip_data['country_code'],
+        'country_name' => $ip_data['country_name']
+      );
 
 			/*
 		    <p>Ip Address: <?php echo $ip_data['ip'] ?></p>
@@ -32,13 +41,9 @@
 		    <p>Latitude: <?php echo $ip_data['latitude'] ?></p>
 		    <p>Longitude: <?php echo $ip_data['longitude'] ?></p>
 			*/
-
-            //$_SESSION['ip_to_location_cache'] = array('ip' => $ip, 'location' => $ip_data);
             
 			return $ip_data;
-
 		}
-		
 	}
 
 	/*========================================================================================================

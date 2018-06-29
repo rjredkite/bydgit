@@ -1,4 +1,6 @@
 <?php
+  $all_pages = $this->getdata_model->get_pages_urls();
+
   if($this->uri->segment(1) == 'us'){
     $iploc['country'] = 'US - United States';
   }else{
@@ -82,10 +84,9 @@
 													<li>
 														<a <?php 
 										                  if($country_lang == 'us'){
-										                    $url2 = $this->getdata_model->get_pages_url(14);
-										                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+										                    echo 'href="'.base_url('us/'.$all_pages[14]).'"';
 										                  }else{
-										                    echo 'href="'.base_url($this->getdata_model->get_pages_url(14)).'"';
+										                    echo 'href="'.base_url($all_pages[14]).'"';
 										                  }
 										                ?>>About Us</a>
 													</li>
@@ -120,30 +121,27 @@
 													<li>
 														<a <?php 
 										                  if($country_lang == 'us'){
-										                    $url2 = $this->getdata_model->get_pages_url(15);
-										                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+										                    echo 'href="'.base_url('us/'.$all_pages[15]).'"';
 										                  }else{
-										                    echo 'href="'.base_url($this->getdata_model->get_pages_url(15)).'"';
+										                    echo 'href="'.base_url($all_pages[15]).'"';
 										                  }
 										                ?>>FAQ</a>
 													</li>
 													<li>
 														<a <?php 
 										                  if($country_lang == 'us'){
-										                    $url2 = $this->getdata_model->get_pages_url(16);
-										                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+										                    echo 'href="'.base_url('us/'.$all_pages[16]).'"';
 										                  }else{
-										                    echo 'href="'.base_url($this->getdata_model->get_pages_url(16)).'"';
+										                    echo 'href="'.base_url($all_pages[16]).'"';
 										                  }
 										                ?>>Terms &amp; Conditions</a>
 													</li>
 													<li>
 														<a <?php 
 										                  if($country_lang == 'us'){
-										                    $url2 = $this->getdata_model->get_pages_url(17);
-										                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+										                    echo 'href="'.base_url('us/'.$all_pages[17]).'"';
 										                  }else{
-										                    echo 'href="'.base_url($this->getdata_model->get_pages_url(17)).'"';
+										                    echo 'href="'.base_url($all_pages[17]).'"';
 										                  }
 										                ?>>Links</a>
 													</li>
@@ -230,7 +228,7 @@
 				<div class="sidebar-contianer">
 					<div class="customer-login">
 						<div id="display-error"></div>
-						<?php echo form_open('pages/userlogin',array('id' => 'userloginmodal')); ?>
+						<?php echo form_open('pages/userloginmodal',array('id' => 'userloginmodal')); ?>
 							<h5>Login to your account!</h5>
 							<input id="email_login" type="email" name="email" placeholder="Email Address" required>
 							<input id="password_login" type="password" name="password" placeholder="Password" required>
@@ -276,12 +274,12 @@
 	    	var email_account = $("#email_login").val();
 		   	var password_account = $("#password_login").val();
 
-	    	var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	    	/*var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
 		    if (!expr.test(email_account)) {
 		        $('#display-error').html('<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please enter valid email.</div>');
-		    }
-		    else {
+		    }*/
+		    /*else {*/
 
 		    	if(password_account == ''){
 		    		$('#display-error').html('<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Invallid Email or Password</div>');
@@ -306,7 +304,7 @@
 			        });
 		    	}
 		    	
-		    }
+		    /*}*/
 	    	
 	    });
 	});

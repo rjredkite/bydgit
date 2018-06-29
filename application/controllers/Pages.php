@@ -28,11 +28,7 @@
             $this->load->view('templates/footer',$data);
 		}
 
-		public function home($url = 'home'){
-		    if(isset($_GET['debug'])) {
-		        $this->output->enable_profiler(TRUE);
-		    }
-		    
+		public function home($url = 'home'){	    
 		  	$iploc = geoCheckIP($this->input->ip_address());
     		$iploc['country'] = $iploc['country_code'].' - '.$iploc['country_name'];
 
@@ -87,8 +83,8 @@
 				$offset = 0;
 			}
 
+			// not used - handled by the home method
 			if($url == 'home'){
-
 				if($iploc['country'] == 'US - United States'){
 					$lang = 'us';
 				}else{
@@ -149,7 +145,6 @@
 				$this->load->view('templates/footer',$data);
 
 			}elseif($url == 'stud-dogs'){
-
 				if($iploc['country'] == 'US - United States'){
 					$config['base_url'] = base_url() . 'us/stud-dogs';
 				}else{
@@ -161,7 +156,44 @@
 				$info = $this->users_model->checkinfo($id);
 				$country_code = $info['post_code'];
 
-				$config['total_rows'] = $this->pages_model->count_stud_dogs($country_code);
+
+				if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
+
+					if($this->input->get('post_code', TRUE) != ''){
+
+						$address = strtr($this->input->get('post_code', TRUE),' ','+');
+
+						$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						if($output->status != 'ZERO_RESULTS'){
+
+							$latitude2 = $output->results[0]->geometry->location->lat;
+							$longitude2 = $output->results[0]->geometry->location->lng;
+
+						}
+
+
+					}else if($country_code != '' && $country_code != 'NULL'){
+
+						$country_address = strtr($country_code,' ','+');
+
+						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						$latitude2 = $output->results[0]->geometry->location->lat;
+						$longitude2 = $output->results[0]->geometry->location->lng;
+
+					}
+
+				}else{
+					$latitude2 = NULL;
+					$longitude2 = NULL;
+				}
+
+				$config['total_rows'] = $this->pages_model->count_stud_dogs($country_code,'NULL',$latitude2,$longitude2);
 				$config['per_page'] = 25;
 				$config['attributes'] = array('class' => 'pagination-link');
 				$config['use_page_numbers'] = TRUE;
@@ -176,8 +208,8 @@
 				$data['metadescription'] 	= 'Find your perfect stud dog today, FREE to advertise, FREE to join, browse over 16800 stud dogs now.';
 				$data['metarobots'] 		= '';
 				
-				$data['studdogs'] = $this->pages_model->get_stud_dogs($config['per_page'], $offset, $country_code);
-
+				$data['studdogs'] = $this->pages_model->get_stud_dogs($config['per_page'], $offset, $country_code,'NULL',$latitude2,$longitude2);
+				$data['stud_images'] = $this->pages_model->first_images_for_listings($data['studdogs']);
 				if(!empty($data['studdogs'])){
 					if($this->input->get('sort_by', TRUE)){
 						foreach ($data['studdogs'] as $daily_views_show){
@@ -191,7 +223,6 @@
 				$this->load->view('templates/footer',$data);
 
 			}elseif($url == 'puppies'){
-
 				if($iploc['country'] == 'US - United States'){
 					$config['base_url'] = base_url() . 'us/puppies';
 				}else{
@@ -202,8 +233,44 @@
 				$id = $users_id_session;
 				$info = $this->users_model->checkinfo($id);
 				$country_code = $info['post_code'];
+
+				if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
+
+					if($this->input->get('post_code', TRUE) != ''){
+
+						$address = strtr($this->input->get('post_code', TRUE),' ','+');
+
+						$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						if($output->status != 'ZERO_RESULTS'){
+
+							$latitude2 = $output->results[0]->geometry->location->lat;
+							$longitude2 = $output->results[0]->geometry->location->lng;
+
+						}
+
+
+					}else if($country_code != '' && $country_code != 'NULL'){
+
+						$country_address = strtr($country_code,' ','+');
+
+						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						$latitude2 = $output->results[0]->geometry->location->lat;
+						$longitude2 = $output->results[0]->geometry->location->lng;
+
+					}
+
+				}else{
+					$latitude2 = NULL;
+					$longitude2 = NULL;
+				}
 				
-				$config['total_rows'] = $this->pages_model->count_puppies($country_code);
+				$config['total_rows'] = $this->pages_model->count_puppies($country_code,'NULL',$latitude2,$longitude2);
 				$config['per_page'] = 25;
 				$config['attributes'] = array('class' => 'pagination-link');
 				$config['use_page_numbers'] = TRUE;
@@ -218,7 +285,8 @@
 				$data['metadescription'] 	= 'Find your perfect puppy today, FREE to advertise, FREE to join, browse puppies now.';
 				$data['metarobots'] 		= '';
 
-				$data['puppies'] = $this->pages_model->get_puppies($config['per_page'], $offset, $country_code);
+				$data['puppies'] = $this->pages_model->get_puppies($config['per_page'], $offset, $country_code,'NULL',$latitude2,$longitude2);
+				$data['pup_images'] = $this->pages_model->first_images_for_listings($data['puppies']);
 
 				if(!empty($data['puppies'])){
 					if($this->input->get('sort_by', TRUE)){
@@ -245,7 +313,43 @@
 				$info = $this->users_model->checkinfo($id);
 				$country_code = $info['post_code'];
 
-				$config['total_rows'] = $this->pages_model->count_memorials($country_code);
+				if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
+
+					if($this->input->get('post_code', TRUE) != ''){
+
+						$address = strtr($this->input->get('post_code', TRUE),' ','+');
+
+						$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						if($output->status != 'ZERO_RESULTS'){
+
+							$latitude2 = $output->results[0]->geometry->location->lat;
+							$longitude2 = $output->results[0]->geometry->location->lng;
+
+						}
+
+
+					}else if($country_code != '' && $country_code != 'NULL'){
+
+						$country_address = strtr($country_code,' ','+');
+
+						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						$latitude2 = $output->results[0]->geometry->location->lat;
+						$longitude2 = $output->results[0]->geometry->location->lng;
+
+					}
+
+				}else{
+					$latitude2 = NULL;
+					$longitude2 = NULL;
+				}
+
+				$config['total_rows'] = $this->pages_model->count_memorials($country_code,$latitude2,$longitude2);
 				$config['per_page'] = 25;
 				$config['attributes'] = array('class' => 'pagination-link');
 				$config['use_page_numbers'] = TRUE;
@@ -260,7 +364,7 @@
 				$data['metadescription'] 	= '';
 				$data['metarobots'] 		= '';
 
-				$data['memorials'] = $this->pages_model->get_memorials($config['per_page'], $offset, $country_code);
+				$data['memorials'] = $this->pages_model->get_memorials($config['per_page'], $offset, $country_code,$latitude2,$longitude2);
 
 				if(!empty($data['memorials'])){
 					if($this->input->get('sort_by', TRUE)){
@@ -289,7 +393,44 @@
 				$info = $this->users_model->checkinfo($id);
 				$country_code = $info['post_code'];
 				
-				$config['total_rows'] = $this->pages_model->count_listings($country_code);
+				if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
+
+					if($this->input->get('post_code', TRUE) != ''){
+
+						$address = strtr($this->input->get('post_code', TRUE),' ','+');
+
+						$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						if($output->status != 'ZERO_RESULTS'){
+
+							$latitude2 = $output->results[0]->geometry->location->lat;
+							$longitude2 = $output->results[0]->geometry->location->lng;
+
+						}
+
+
+					}else if($country_code != '' && $country_code != 'NULL'){
+
+						$country_address = strtr($country_code,' ','+');
+
+						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+						$output= json_decode($geocode);
+
+						$latitude2 = $output->results[0]->geometry->location->lat;
+						$longitude2 = $output->results[0]->geometry->location->lng;
+
+					}
+
+				}else{
+					$latitude2 = NULL;
+					$longitude2 = NULL;
+				}
+
+
+				$config['total_rows'] = $this->pages_model->count_listings($country_code,$latitude2,$longitude2);
 				$config['per_page'] = 25;
 				$config['attributes'] = array('class' => 'pagination-link');
 				$config['use_page_numbers'] = TRUE;
@@ -307,7 +448,7 @@
 				$data['metadescription'] 	= '';
 				$data['metarobots'] 		= '';
 
-				$data['listings'] = $this->pages_model->get_listings($config['per_page'], $offset, $country_code);
+				$data['listings'] = $this->pages_model->get_listings($config['per_page'], $offset, $country_code,$latitude2,$longitude2);
 
 				if(!empty($data['listings'])){
 					if($this->input->get('keywords', TRUE)){
@@ -495,7 +636,7 @@
 	  			
 		        $this->load->library('image_lib');
 
-				$data['featureds'] = $this->users_model->featured();
+				$data['featureds'] = $this->users_model->cron_featured();
 
 				/*=====================================================
 				[-- LISTINGS CREATE SMALL THUBNAILS -------------------]
@@ -1231,7 +1372,7 @@
 	    		$password = $this->input->post('password');
 	    		$users_id = $this->users_model->userlogin($email, $password);
 
-	    		if($users_id){
+	    		if($users_id != ''){
 
 	    			$id = $users_id;
 	    			$user_login = $this->getdata_model->get_user($id);
@@ -1241,7 +1382,7 @@
 	    				$this->session->set_flashdata('flashdata_failed', 'You have been banned from Breed Your Dog.');
 						redirect(''.base_url().'');
 
-	    			}elseif($user_login['confirm_code'] != ''){
+	    			}else if($user_login['confirm_code'] != ''){
 	    				
 						$iploc = geoCheckIP($this->input->ip_address());
     					$iploc['country'] = $iploc['country_code'].' - '.$iploc['country_name'];
@@ -1279,73 +1420,95 @@
 
 	    }
 
+	    public function validemail(){
+
+	    	$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+	    	if($this->form_validation->run() === FALSE){
+	    		
+	    	}
+	    }
 
 	    public function userloginmodal(){
 
-    		$email = $this->input->post('email');
+	    	$email = $this->input->post('email');
     		$password = $this->input->post('password');
     		$users_id = $this->users_model->userlogin($email, $password);
     		$result = array();
 
-    		if($users_id){
+	    	$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 
-    			$id = $users_id;
-    			$user_login = $this->getdata_model->get_user($id);
+	    	if($this->form_validation->run() === FALSE){
 
-    			if($user_login['banned'] == 1){
-
-    				$result['status'] = 'failed';
-					$result['errordisplay'] = '<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You have been banned from Breed Your Dog.</div>';
+	    		$result['status'] = 'failed';
+					$result['errordisplay'] = '<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please enter valid email.</div>';
 					
 					echo json_encode($result);
 
-    			}elseif($user_login['confirm_code'] != ''){
-    				
-					$iploc = geoCheckIP($this->input->ip_address());
-					$iploc['country'] = $iploc['country_code'].' - '.$iploc['country_name'];
+	    	}else{
 
-					if($iploc['country'] == 'US - United States'){
-						$redirect = 'us/needs-confirm';
-					}else{
-						$redirect = 'needs-confirm';
-					} 
+	    		if($users_id != ''){
 
-					$result['status'] = 'confirm';
-					$result['url'] = base_url($redirect);
-					
-					echo json_encode($result);
-					
-    			}else{
-    				$data['users'] = $this->users_model->get_users($users_id);
+	    			$id = $users_id;
+	    			$user_login = $this->getdata_model->get_user($id);
 
-					$user_data = array(
-						'user_id_byd' => $data['users']['id'],
-						'userlogged_in' => true
-					);
-					$this->session->set_userdata($user_data);
+	    			if($user_login['banned'] == 1){
 
-					$iploc = geoCheckIP($this->input->ip_address());
-					$iploc['country'] = $iploc['country_code'].' - '.$iploc['country_name'];
+	    				$result['status'] = 'failed';
+						$result['errordisplay'] = '<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>You have been banned from Breed Your Dog.</div>';
+						
+						echo json_encode($result);
 
-					if($iploc['country'] == 'US - United States'){
-						$redirect = 'us/user/dashboard';
-					}else{
-						$redirect = 'user/dashboard';
-					} 
+	    			}elseif($user_login['confirm_code'] != ''){
+	    				
+						$iploc = geoCheckIP($this->input->ip_address());
+						$iploc['country'] = $iploc['country_code'].' - '.$iploc['country_name'];
 
-					$result['status'] = 'success';
-					$result['url'] = base_url($redirect);
+						if($iploc['country'] == 'US - United States'){
+							$redirect = 'us/needs-confirm';
+						}else{
+							$redirect = 'needs-confirm';
+						} 
 
-					echo json_encode($result);
-    			}
+						$result['status'] = 'confirm';
+						$result['url'] = base_url($redirect);
+						
+						echo json_encode($result);
+						
+	    			}else{
+	    				$data['users'] = $this->users_model->get_users($users_id);
 
-			}else{
+						$user_data = array(
+							'user_id_byd' => $data['users']['id'],
+							'userlogged_in' => true
+						);
+						$this->session->set_userdata($user_data);
 
-				$result['status'] = 'failed';
-					$result['errordisplay'] = '<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Invallid Email or Password</div>';
-					
-					echo json_encode($result);
-			}
+						$iploc = geoCheckIP($this->input->ip_address());
+						$iploc['country'] = $iploc['country_code'].' - '.$iploc['country_name'];
+
+						if($iploc['country'] == 'US - United States'){
+							$redirect = 'us/user/dashboard';
+						}else{
+							$redirect = 'user/dashboard';
+						} 
+
+						$result['status'] = 'success';
+						$result['url'] = base_url($redirect);
+
+						echo json_encode($result);
+	    			}
+
+				}else{
+
+					$result['status'] = 'failed';
+						$result['errordisplay'] = '<div class="alert alert-danger alert-dismissable fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Invallid Email or Password</div>';
+						
+						echo json_encode($result);
+				}
+
+	    	}
+
 
 	    }
 

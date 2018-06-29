@@ -220,6 +220,7 @@ foreach($userinformations as $info): ?>
           <h3>Pictures</h3> 
           <div class="well">
             <p>You may upload up to <?php echo $plans['photos_per_listing']; ?> pictures of your stud dog / bitch. Image 1 should be the picture that best represents your stud dog / bitch as this will be used in search results and other pages which list dogs. Only the page that describes your listing in detail will use the other images.</p>
+            <p>"Note: Please upload this kind of file format for images ( gif, jpg, png, jpeg )"</p>
           </div>
           <div class="user-picture">
             <?php 

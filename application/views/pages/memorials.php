@@ -31,6 +31,9 @@
 ?>
 
 <?php
+	$latitude2 = NULL;
+	$longitude2 = NULL;
+
 	if($this->input->get('post_code', TRUE) != '' || $info['post_code'] != ''){
 
 		if($this->input->get('post_code', TRUE) != ''){
@@ -68,7 +71,7 @@
 
 		}
 	
-	}elseif($this->input->get('country_id', TRUE) != '' || $this->input->get('country_id', TRUE) != 'all' || $info['country_id'] != ''){
+	}else if($this->input->get('country_id', TRUE) != '' || $this->input->get('country_id', TRUE) != 'all' || $info['country_id'] != ''){
 
 		if($this->input->get('country_id', TRUE) != '' && $this->input->get('country_id', TRUE) != 'all'){
 
@@ -109,6 +112,7 @@
 		}
 
 	}
+
 ?>
 
 <div class="page-listing-container">
@@ -197,14 +201,14 @@
 					<div class="page-listing-body">
 						<div class="row">
 							<div class="col-sm-6">
-							<?php if($this->pages_model->count_memorials($country_code) == ''){
+							<?php if($this->pages_model->count_memorials($country_code,$latitude2,$longitude2) == ''){
 
 								echo 'No entries found';
 
-							}elseif($this->pages_model->count_memorials($country_code) <= 25){ 
+							}elseif($this->pages_model->count_memorials($country_code,$latitude2,$longitude2) <= 25){ 
 
-								echo 'Displaying all '.$this->pages_model->count_memorials($country_code);
-								if($this->pages_model->count_memorials($country_code) == 1){
+								echo 'Displaying all '.$this->pages_model->count_memorials($country_code,$latitude2,$longitude2);
+								if($this->pages_model->count_memorials($country_code,$latitude2,$longitude2) == 1){
 									echo ' listing';
 								}else{
 									echo ' listings';
@@ -235,7 +239,7 @@
 									 	echo $num2;
 									}
 
-								?> of <?php echo $this->pages_model->count_memorials($country_code); ?> in total</p>
+								?> of <?php echo $this->pages_model->count_memorials($country_code,$latitude2,$longitude2); ?> in total</p>
 							<?php } ?>
 							</div>
 							<div class="col-sm-6">

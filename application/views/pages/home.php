@@ -56,7 +56,6 @@
 							<?php 
 								foreach($featureds as $featured){
 									$listing_id = $featured['id'];
-									$listing_image = $this->users_model->get_listing_images($listing_id);
 
 									?>
 										<a <?php
@@ -66,8 +65,8 @@
 						                          echo 'href="'.base_url('listings/'.$featured['id'].'?context=show_homepage').'"';
 						                        }
 											?>>
-											<?php if($listing_image['image'] != ''): ?>
-											<img id="featured-img<?php echo $featured['id'];?>" class="lazyload homepage-featured" src="<?php echo base_url('/uploads/listing_images/'.$listing_image['listing_id'].'/'.$listing_image['id'].'/thumb_small_'.$listing_image['image']); ?>" data-src="<?php echo base_url('/uploads/listing_images/'.$listing_image['listing_id'].'/'.$listing_image['id'].'/thumb_small_'.$listing_image['image']); ?>" alt="<?php echo $featured['title']; ?> Featured Image">
+											<?php if($featured['image'] != ''): ?>
+											<img id="featured-img<?php echo $featured['id'];?>" class="lazyload homepage-featured" src="<?php echo base_url('/uploads/listing_images/'.$featured['id'].'/'.$featured['image_id'].'/thumb_small_'.$featured['image']); ?>" data-src="<?php echo base_url('/uploads/listing_images/'.$featured['id'].'/'.$featured['image_id'].'/thumb_small_'.$featured['image']); ?>" alt="<?php echo $featured['title']; ?> Featured Image">
 											<?php else: ?>
 											<img id="featured-img<?php echo $featured['id'];?>" class="homepage-featured" src="<?php echo base_url('/uploads/thumb_small_noimage.png'); ?>" alt="<?php echo $featured['title']; ?> No Featured Image">
 											<?php endif; ?>
@@ -77,9 +76,7 @@
 											$(document).ready(function(){
 											    $('#featured-img<?php echo $featured['id']; ?>').popover({title: "Featured Listing", content: "<?php
 												
-													$breed_id =  $featured['breed_id'];;
-				                              		$getbreed = $this->getdata_model->get_breed_id($breed_id);
-				                              		echo $getbreed['name'];
+				                              		echo $featured['breed_name'];
 
 											    ?>", trigger: "hover", placement: "bottom"})
 											});

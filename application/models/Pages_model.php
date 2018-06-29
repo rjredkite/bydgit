@@ -54,24 +54,24 @@
 		/*=============================================================================================
 		[-- LISTINGS STUD DOGS PAGES FOR SEARCH FIELDS WITH PAGINATION -------------------------------]
 	    ==============================================================================================*/
-	    public function count_stud_dogs($country_code = 'NULL', $breed_id = 'NULL'){
-
-	     	$this->db->order_by('featured', 'DESC');
-			$this->db->order_by('id', 'DESC');
-			$this->db->where('listing_type', 'dog');
-			$this->db->where('published', 1);
-			$this->db->group_start();
-				$this->db->where('deleted_at', NULL);
-				$this->db->or_where('deleted_at', '0000-00-00 00:00:00');
-			$this->db->group_end();
-
-			$query = $this->db->get('listings');
+	    public function count_stud_dogs($country_code = 'NULL', $breed_id = 'NULL',$latitude2 = NULL,$longitude2 = NULL){
 
 			if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
 
+				$this->db->order_by('featured', 'DESC');
+				$this->db->order_by('id', 'DESC');
+				$this->db->where('listing_type', 'dog');
+				$this->db->where('published', 1);
+				$this->db->group_start();
+					$this->db->where('deleted_at', NULL);
+					$this->db->or_where('deleted_at', '0000-00-00 00:00:00');
+				$this->db->group_end();
+
+				$query = $this->db->get('listings');
+
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -82,7 +82,7 @@
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
-					}
+					}*/
 
 					foreach($query->result_array() as $result){
 
@@ -102,14 +102,14 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
 						$output= json_decode($geocode);
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
-						$longitude2 = $output->results[0]->geometry->location->lng;
+						$longitude2 = $output->results[0]->geometry->location->lng;*/
 
 						foreach($query->result_array() as $result){
 
@@ -196,32 +196,32 @@
 
 			$this->db->where('users.banned !=', 1);
 			$this->db->where('users.suspended !=', 1);
+	    	$this->db->select('COUNT(*) as count', FALSE);
 
 			$query = $this->db->get('users');
 
-
-			return $query->num_rows();
+			return $query->result_array()[0]['count'];
 
 	    }
 
-	    public function get_stud_dogs($limit = FALSE, $offset = FALSE, $country_code = 'NULL' ,$breed_id = 'NULL'){
-
-	    	$this->db->order_by('featured', 'DESC');
-			$this->db->order_by('id', 'DESC');
-			$this->db->where('listing_type', 'dog');
-			$this->db->where('published', 1);
-			$this->db->group_start();
-				$this->db->where('deleted_at', NULL);
-				$this->db->or_where('deleted_at', '0000-00-00 00:00:00');
-			$this->db->group_end();
-
-			$query = $this->db->get('listings');
+	    public function get_stud_dogs($limit = FALSE, $offset = FALSE, $country_code = 'NULL' ,$breed_id = 'NULL',$latitude2,$longitude2){
 
 			if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
 
+				$this->db->order_by('featured', 'DESC');
+				$this->db->order_by('id', 'DESC');
+				$this->db->where('listing_type', 'dog');
+				$this->db->where('published', 1);
+				$this->db->group_start();
+					$this->db->where('deleted_at', NULL);
+					$this->db->or_where('deleted_at', '0000-00-00 00:00:00');
+				$this->db->group_end();
+
+				$query = $this->db->get('listings');
+
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -233,7 +233,7 @@
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
 					}
-
+*/
 					foreach($query->result_array() as $result){
 
 						$latitude1 = $result['latitude'];
@@ -252,7 +252,7 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -260,7 +260,7 @@
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
-
+*/
 						foreach($query->result_array() as $result){
 
 							$latitude1 = $result['latitude'];
@@ -346,19 +346,47 @@
 			$this->db->group_end();
 
 			$this->db->join('listings', 'listings.user_id = users.id');
+			$this->db->join('breeds', 'listings.breed_id = breeds.id');
 
 			$this->db->where('users.banned !=', 1);
 			$this->db->where('users.suspended !=', 1);
+
+			$this->db->select('users.*, listings.*, breeds.name AS breed_name');
 
 			$query = $this->db->get('users');
 
 			return $query->result_array();
 		}
 
+		public function first_images_for_listings($listings) {
+			$listing_ids = array();
+
+			foreach ($listings as $row) {
+				$listing_ids[] = $row['id'];
+			}
+
+			$this->db->select('id, image, listing_id');
+			$this->db->where_in('listing_id', $listing_ids);
+			$this->db->where('dont_display', 0);
+			$this->db->group_by('listing_id');
+			$this->db->order_by('sort',  'ASC');
+			
+			$query = $this->db->get('listing_images');
+
+			$images_by_listing_id = array();
+
+			foreach ($query->result_array() as $row) {
+				$images_by_listing_id[$row['listing_id']] = $row;
+			}
+
+			return $images_by_listing_id;
+			die(print_r($query->result_array()));
+		}
+
 		/*=============================================================================================
 		[-- LISTINGS PUPPIES PAGES FOR SEARCH FIELDS WITH PAGINATION ---------------------------------]
 	    ==============================================================================================*/
-	     public function count_puppies($country_code = 'NULL', $breed_id = 'NULL'){
+	     public function count_puppies($country_code = 'NULL', $breed_id = 'NULL',$latitude2,$longitude2){
 
 	     	$this->db->order_by('featured', 'DESC');
 			$this->db->order_by('id', 'DESC');
@@ -375,7 +403,7 @@
 
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -386,7 +414,7 @@
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
-					}
+					}*/
 
 					foreach($query->result_array() as $result){
 
@@ -406,7 +434,7 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -414,7 +442,7 @@
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
-
+*/
 						foreach($query->result_array() as $result){
 
 							$latitude1 = $result['latitude'];
@@ -498,14 +526,15 @@
 
 			$this->db->where('users.banned !=', 1);
 			$this->db->where('users.suspended !=', 1);
+      $this->db->select('COUNT(*) as count', FALSE);
 
 			$query = $this->db->get('users');
 
-			return $query->num_rows();
+			return $query->result_array()[0]['count'];
 
 	    }
 
-	    public function get_puppies($limit = FALSE, $offset = FALSE, $country_code = 'NULL', $breed_id = 'NULL'){
+	    public function get_puppies($limit = FALSE, $offset = FALSE, $country_code = 'NULL', $breed_id = 'NULL',$latitude2,$longitude2){
 	    	
 	    	$this->db->order_by('featured', 'DESC');
 			$this->db->order_by('id', 'DESC');
@@ -523,7 +552,7 @@
 
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -534,7 +563,7 @@
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
-					}
+					}*/
 
 					foreach($query->result_array() as $result){
 
@@ -554,14 +583,14 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
 						$output= json_decode($geocode);
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
-						$longitude2 = $output->results[0]->geometry->location->lng;
+						$longitude2 = $output->results[0]->geometry->location->lng;*/
 
 						foreach($query->result_array() as $result){
 
@@ -648,9 +677,12 @@
 			$this->db->group_end();
 
 			$this->db->join('listings', 'listings.user_id = users.id');
+			$this->db->join('breeds', 'listings.breed_id = breeds.id');
 
 			$this->db->where('users.banned !=', 1);
 			$this->db->where('users.suspended !=', 1);
+
+			$this->db->select('users.*, listings.*, breeds.name AS breed_name');
 
 			$query = $this->db->get('users');
 			
@@ -660,7 +692,7 @@
 		/*=============================================================================================
 		[-- LISTINGS MEMORIALS PAGES FOR SEARCH FIELDS WITH PAGINATION -------------------------------]
 	    ==============================================================================================*/
-	     public function count_memorials($country_code = 'NULL'){
+	     public function count_memorials($country_code = 'NULL',$latitude2,$longitude2){
 
 	     	$this->db->order_by('featured', 'DESC');
 			$this->db->order_by('id', 'DESC');
@@ -677,7 +709,7 @@
 
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -688,7 +720,7 @@
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
-					}
+					}*/
 
 					foreach($query->result_array() as $result){
 
@@ -708,14 +740,14 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
 						$output= json_decode($geocode);
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
-						$longitude2 = $output->results[0]->geometry->location->lng;
+						$longitude2 = $output->results[0]->geometry->location->lng;*/
 
 						foreach($query->result_array() as $result){
 
@@ -803,7 +835,7 @@
 
 	    }
 
-	    public function get_memorials($limit = FALSE, $offset = FALSE, $country_code){
+	    public function get_memorials($limit = FALSE, $offset = FALSE, $country_code,$latitude2,$longitude2){
 	    
 	    	$this->db->order_by('featured', 'DESC');
 			$this->db->order_by('id', 'DESC');
@@ -820,7 +852,7 @@
 
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -831,7 +863,7 @@
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
-					}
+					}*/
 
 					foreach($query->result_array() as $result){
 
@@ -850,7 +882,7 @@
 					
 
 					if($country_code != '' && $country_code != 'NULL'){
-
+/*
 						$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
@@ -859,7 +891,7 @@
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
-
+*/
 						foreach($query->result_array() as $result){
 
 							$latitude1 = $result['latitude'];
@@ -953,7 +985,7 @@
 		/*=============================================================================================
 		[-- LISTINGS LISTINGS PAGES FOR SEARCH FIELDS WITH PAGINATION --------------------------------]
 	    ==============================================================================================*/
-	     public function count_listings($country_code = 'NULL'){
+	     public function count_listings($country_code = 'NULL',$latitude2,$longitude2){
 	     	
 	     	$this->db->order_by('featured', 'DESC');
 			$this->db->order_by('id', 'DESC');
@@ -969,7 +1001,7 @@
 
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -980,7 +1012,7 @@
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
-					}
+					}*/
 
 					foreach($query->result_array() as $result){
 
@@ -1000,7 +1032,7 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -1008,7 +1040,7 @@
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
 						$longitude2 = $output->results[0]->geometry->location->lng;
-
+*/
 						foreach($query->result_array() as $result){
 
 							$latitude1 = $result['latitude'];
@@ -1094,7 +1126,7 @@
 
 	    }
 
-	    public function get_listings($limit = FALSE, $offset = FALSE, $country_code){
+	    public function get_listings($limit = FALSE, $offset = FALSE, $country_code,$latitude2,$longitude2){
 
 	    	$this->db->order_by('featured', 'DESC');
 			$this->db->order_by('id', 'DESC');
@@ -1110,7 +1142,7 @@
 
 				if($this->input->get('post_code', TRUE) != ''){
 
-					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+					/*$address = strtr($this->input->get('post_code', TRUE),' ','+');
 
 					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
@@ -1122,7 +1154,7 @@
 						$longitude2 = $output->results[0]->geometry->location->lng;
 
 					}
-
+*/
 					foreach($query->result_array() as $result){
 
 						$latitude1 = $result['latitude'];
@@ -1141,14 +1173,14 @@
 
 					if($country_code != '' && $country_code != 'NULL'){
 
-						$country_address = strtr($country_code,' ','+');
+						/*$country_address = strtr($country_code,' ','+');
 
 						$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
 
 						$output= json_decode($geocode);
 
 						$latitude2 = $output->results[0]->geometry->location->lat;
-						$longitude2 = $output->results[0]->geometry->location->lng;
+						$longitude2 = $output->results[0]->geometry->location->lng;*/
 
 						foreach($query->result_array() as $result){
 

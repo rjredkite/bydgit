@@ -168,16 +168,21 @@
 				$hash = $login->password_hash;
 
 			}
-			
-			if($hash == hash('sha512', $password)){
 
-				return $id;
+			if(!empty($result)){
+				if($hash == hash('sha512', $password)){
 
+					return $id;
+
+				}else{
+
+					return false;
+
+				}
 			}else{
-
 				return false;
-
 			}
+			
 		}
 
 
@@ -1392,9 +1397,9 @@
 
 
 	    /*=====================================================
-		[-- LISTINGS HOMEPAGE  -------------------------------]
+		[-- Legacy method possibly used by cron job?  -------------------------------]
 	    ======================================================*/
-	    public function featured(){
+	    public function cron_featured(){
 
 			$this->db->order_by('listings.id', 'RANDOM');
 			$this->db->limit(4);
@@ -1409,6 +1414,35 @@
 
 			$this->db->where('users.banned !=', 1);
 			$this->db->where('users.suspended !=', 1);
+
+			$query = $this->db->get('users');
+
+			return $query->result_array();
+		}
+	    /*=====================================================
+		[-- Featured listings for homepage  -------------------------------]
+	    ======================================================*/
+	    public function featured(){
+
+	    $this->db->select('listings.id, listings.title, breeds.name AS breed_name, listing_images.id AS image_id, listing_images.image');
+			$this->db->order_by('listings.id', 'RANDOM');
+			$this->db->limit(4);
+			$this->db->group_start();
+				$this->db->where('listings.deleted_at', NULL);
+				$this->db->or_where('listings.deleted_at', '0000-00-00 00:00:00');
+			$this->db->group_end();
+			
+			$this->db->where('listings.published', 1);
+
+			$this->db->join('listings', 'listings.user_id = users.id');
+			$this->db->join('breeds', 'listings.breed_id = breeds.id');
+			$this->db->join('listing_images', 'listings.id = listing_images.listing_id');
+
+			$this->db->group_by('listings.id');
+
+			$this->db->where('users.banned !=', 1);
+			$this->db->where('users.suspended !=', 1);
+			$this->db->where('listing_images.dont_display', 0);
 
 			$query = $this->db->get('users');
 

@@ -1037,10 +1037,22 @@
 			if(is_numeric($this->input->get('user_id', TRUE))){
 				$this->db->where('user_id', $this->input->get('user_id', TRUE)); 
 			}   
+			
+			if($this->input->get('keywords', TRUE) == '0' || $this->input->get('keywords', TRUE) == 'zero'){
+				$this->db->join('listings', 'listings.user_id = users.id');
+				$this->db->where('users.banned !=', 1);
+				$this->db->where('users.suspended !=', 1);
+				$query = $this->db->get('users');
 
-			//$this->db->order_by('id','DESC');
-			$query = $this->db->get('listings');
-			return $query->result_array();
+				return $query->result_array();
+
+			}else{
+				//$this->db->order_by('id','DESC');
+				$query = $this->db->get('listings');
+				return $query->result_array();
+
+			}
+			
 
 		}
 
@@ -1557,7 +1569,6 @@
 			if(is_numeric($this->input->get('breed_id', TRUE))){
 				$this->db->where('breed_id', $this->input->get('breed_id', TRUE)); 
 			}
-
 
 			if(is_numeric($this->input->get('country_id', TRUE))){
 				$this->db->where('country_id', $this->input->get('country_id', TRUE)); 

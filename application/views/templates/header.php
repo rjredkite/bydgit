@@ -3,6 +3,9 @@
   $studdogs = $this->users_model->get_stud_dogs();
   $puppies = $this->users_model->get_puppies();*/
 
+  // load all pages by ID in to one array instead of using separate DB requests for each
+  $all_pages = $this->getdata_model->get_pages_urls();
+
   if($this->uri->segment(1) == 'us'){
     $iploc['country'] = 'US - United States';
   }else{
@@ -43,6 +46,20 @@
   <link href="<?php echo base_url() ?>assets/css/style.min.css" rel="stylesheet" type="text/css">
   <script src="<?php echo base_url() ?>assets/js/jquery-3.2.0.min.js"></script>
   
+  <link <?php if($country_lang == 'us'){
+      echo'rel="alternate" href="'.site_url().uri_string().'" hreflang="en-us"';
+    }else{
+      if(base_url() == current_url()){
+        echo'rel="alternate" href="'.site_url().'us'.'" hreflang="en-us"';
+      }else{
+        echo'rel="alternate" href="'.site_url().'us/'.uri_string().'" hreflang="en-us"';
+      }
+  } ?> />
+  <link <?php if($country_lang == 'us'){
+      echo'rel="alternate" href="'.str_replace('/us','',site_url().uri_string()).'" hreflang="en-gb"';
+    }else{
+      echo'rel="alternate" href="'.site_url().uri_string().'" hreflang="en-gb"';
+  } ?> />
 </head>
 <body>
 <header>
@@ -133,63 +150,55 @@
               }
             ?>>Breed Profiles</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(2);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[2] || $this->uri->segment(2) == $all_pages[2]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(2);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[2]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(2)).'"';
+                    echo 'href="'.base_url($all_pages[2]).'"';
                   }
                 ?>>Before your Breed</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(3);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[3] || $this->uri->segment(2) == $all_pages[3]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(3);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[3]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(3)).'"';
+                    echo 'href="'.base_url($all_pages[3]).'"';
                   }
                 ?>>Dog Health</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(4);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[4] || $this->uri->segment(2) == $all_pages[4]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(4);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[4]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(4)).'"';
+                    echo 'href="'.base_url($all_pages[4]).'"';
                   }
                 ?>>Choosing a Puppy</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(5);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[5] || $this->uri->segment(2) == $all_pages[5]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(5);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[5]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(5)).'"';
+                    echo 'href="'.base_url($all_pages[5]).'"';
                   }
                 ?>>Caring for your Puppy</a></li>
               </ul>
@@ -198,123 +207,107 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">BREEDING PROCESS <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(6);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[6] || $this->uri->segment(2) == $all_pages[6]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(6);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[6]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(6)).'"';
+                    echo 'href="'.base_url($all_pages[6]).'"';
                   }
                 ?>>Before Conception</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(7);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[7] || $this->uri->segment(2) == $all_pages[7]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(7);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[7]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(7)).'"';
+                    echo 'href="'.base_url($all_pages[7]).'"';
                   }
                 ?>>The Heat Cycle</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(8);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[8] || $this->uri->segment(2) == $all_pages[8]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(8);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[8]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(8)).'"';
+                    echo 'href="'.base_url($all_pages[8]).'"';
                   }
                 ?>>Conception</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(9);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[9] || $this->uri->segment(2) == $all_pages[9]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(9);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[9]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(9)).'"';
+                    echo 'href="'.base_url($all_pages[9]).'"';
                   }
                 ?>>After Conception</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(10);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[10]|| $this->uri->segment(2) == $all_pages[10]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(10);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[10]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(10)).'"';
+                    echo 'href="'.base_url($all_pages[10]).'"';
                   }
                 ?>>Whelping</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(11);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[11]|| $this->uri->segment(2) == $all_pages[11]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(11);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[11]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(11)).'"';
+                    echo 'href="'.base_url($all_pages[11]).'"';
                   }
                 ?>>Caring for the Litter</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(12);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[12]|| $this->uri->segment(2) == $all_pages[12]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(12);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[12]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(12)).'"';
+                    echo 'href="'.base_url($all_pages[12]).'"';
                   }
                 ?>>Post Labour Care four your Bitch</a></li>
                 <li><a <?php 
-                $urllink = $this->getdata_model->get_pages_url(13);
-              if($this->uri->segment(1) == $urllink['url'] || $this->uri->segment(2) == $urllink['url']){
+              if($this->uri->segment(1) == $all_pages[13]|| $this->uri->segment(2) == $all_pages[13]){
                 echo 'class="navbar-active"';
 
               }
 
             ?> <?php 
                   if($country_lang == 'us'){
-                    $url2 = $this->getdata_model->get_pages_url(13);
-                    echo 'href="'.base_url('us/'.$url2['url']).'"';
+                    echo 'href="'.base_url('us/'.$all_pages[13]).'"';
                   }else{
-                    echo 'href="'.base_url($this->getdata_model->get_pages_url(13)).'"';
+                    echo 'href="'.base_url($all_pages[13]).'"';
                   }
                 ?>>Interviewing Potential Owners</a></li>
               </ul>

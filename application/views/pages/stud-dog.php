@@ -32,6 +32,9 @@
 ?>
 
 <?php
+	$latitude2 = NULL;
+	$longitude2 = NULL;
+
 	if($this->input->get('post_code', TRUE) != '' || $info['post_code'] != ''){
 
 		if($this->input->get('post_code', TRUE) != ''){
@@ -200,14 +203,14 @@
 					<div class="page-listing-body">
 						<div class="row">
 							<div class="col-sm-6">
-							<?php if($this->pages_model->count_stud_dogs($country_code) == ''){
+							<?php if($this->pages_model->count_stud_dogs($country_code,'NULL',$latitude2,$longitude2) == ''){
 
 								echo 'No entries found';
 
-							}elseif($this->pages_model->count_stud_dogs($country_code) <= 25){ 
+							}elseif($this->pages_model->count_stud_dogs($country_code,'NULL',$latitude2,$longitude2) <= 25){ 
 
 								echo 'Displaying all '.$this->pages_model->count_stud_dogs($country_code);
-								if($this->pages_model->count_stud_dogs($country_code) == 1){
+								if($this->pages_model->count_stud_dogs($country_code,'NULL',$latitude2,$longitude2) == 1){
 									echo ' listing';
 								}else{
 									echo ' listings';
@@ -239,7 +242,7 @@
 									 	echo $num2;
 									}
 
-								?> of <?php echo $this->pages_model->count_stud_dogs($country_code); ?> in total</p>
+								?> of <?php echo $this->pages_model->count_stud_dogs($country_code,'NULL',$latitude2,$longitude2); ?> in total</p>
 							<?php } ?>
 							</div>
 							<div class="col-sm-6">
@@ -258,9 +261,8 @@
 									<div class="listing-container<?php
 
 										$users_id = $stud['user_id'];
-										$userinfo = $this->users_model->get_users($users_id);
 
-										if($userinfo['plan_id'] == 7){
+										if($stud['plan_id'] == 7){
 										echo ' ultimate-listing';
 										}
 
@@ -272,14 +274,14 @@
 
 											echo ' featured';
 
-										}elseif($stud['highlight'] == 1 && $stud['highlight_until'] >= $datenow || $userinfo['plan_id'] == 7 || $userinfo['plan_id'] == 6){
+										}elseif($stud['highlight'] == 1 && $stud['highlight_until'] >= $datenow || $stud['plan_id'] == 7 || $stud['plan_id'] == 6){
 
 											echo ' highlighted';
 
 										}
 						          
 						            ?>"> 
-										<?php if($userinfo['plan_id'] == 1 || $userinfo['plan_id'] == 5){ ?>
+										<?php if($stud['plan_id'] == 1 || $stud['plan_id'] == 5){ ?>
 		
 											<?php
 												if($stud['featured'] == 1 && $stud['featured_until'] >= $datenow && $stud['highlight'] == 1 && $stud['highlight_until'] >= $datenow){
@@ -353,12 +355,8 @@
 					                      ?>><?php echo $stud['title']; ?></a></h3>
 									    </div>
 									    <div class="col-sm-4">
-									    	<?php 
-						                        $listing_id = $stud['id'];
-						                        $listing_image = $this->users_model->get_listing_images($listing_id);
-					                      	?>
-					                      	<?php if($listing_image['image'] != ''): ?>
-					                        	<img class="lazyload" src="<?php echo base_url('/uploads/listing_images/'.$listing_image['listing_id'].'/'.$listing_image['id'].'/thumb_'.$listing_image['image']); ?>" data-src="<?php echo base_url('/uploads/listing_images/'.$listing_image['listing_id'].'/'.$listing_image['id'].'/thumb_'.$listing_image['image']); ?>" alt="<?php echo $stud['title']; ?> Listing Image">
+					                      	<?php if(isset($stud_images[$stud['id']])): ?>
+					                        	<img class="lazyload" src="<?php echo base_url('/uploads/listing_images/'.$stud_images[$stud['id']]['listing_id'].'/'.$stud_images[$stud['id']]['id'].'/thumb_'.$stud_images[$stud['id']]['image']); ?>" data-src="<?php echo base_url('/uploads/listing_images/'.$stud_images[$stud['id']]['listing_id'].'/'.$stud_images[$stud['id']]['id'].'/thumb_'.$stud_images[$stud['id']]['image']); ?>" alt="<?php echo $stud['title']; ?> Listing Image">
 					                      	<?php else: ?>
 					                        	<img src="<?php echo base_url('/uploads/noimage.png'); ?>" alt="<?php echo $stud['title']; ?> Listing Image">
 					                      	<?php endif; ?>
@@ -404,12 +402,7 @@
 										      <div class="row">
 										        <div class="col-xs-4"><b>Breed:</b></div>
 											        <div class="col-xs-8">
-											          <?php 
-							                            $breed_id = $stud['breed_id'];
-							                            $getbreed = $this->getdata_model->get_breed_id($breed_id);
-
-							                            echo $getbreed['name'];
-							                          ?>
+											          <?php echo $stud['breed_name']; ?>
 											    </div>
 										      </div>
 

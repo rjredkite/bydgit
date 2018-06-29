@@ -359,7 +359,7 @@
                         }else if($_POST['txn_type'] == 'recurring_payment'){
 
                               $recurring_payment_id = $_POST['recurring_payment_id'];
-                              $next_payment = $_POST['next_payment_date'];
+                              $next_payment_date = $_POST['next_payment_date'];
                               $status = $_POST['profile_status'];
 
                               $this->payment_model->subscription_ipn_recurring_paments($recurring_payment_id,$next_payment_date,$status);
@@ -424,7 +424,7 @@
                         }else if($_POST['txn_type'] == 'recurring_payment_suspended'){
 
                               $recurring_payment_id = $_POST['recurring_payment_id'];
-                              $next_payment = $_POST['next_payment_date'];
+                              $next_payment_date = $_POST['next_payment_date'];
                               $status = $_POST['profile_status'];
 
                               $this->payment_model->subscription_ipn_recurring_paments($recurring_payment_id,$next_payment_date,$status);
@@ -490,7 +490,7 @@
                         }else if($_POST['txn_type'] == 'recurring_payment_profile_cancel'){
 
                               $recurring_payment_id = $_POST['recurring_payment_id'];
-                              $next_payment = $_POST['next_payment_date'];
+                              $next_payment_date = $_POST['next_payment_date'];
                               $status = $_POST['profile_status'];
 
                               $this->payment_model->subscription_ipn_recurring_paments($recurring_payment_id,$next_payment_date,$status);
