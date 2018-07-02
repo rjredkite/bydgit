@@ -1270,6 +1270,42 @@
 			$info = $this->users_model->checkinfo($id);
 			$country_code = $info['post_code'];
 
+			if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
+
+				if($this->input->get('post_code', TRUE) != ''){
+
+					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+
+					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+					$output= json_decode($geocode);
+
+					if($output->status != 'ZERO_RESULTS'){
+
+						$latitude2 = $output->results[0]->geometry->location->lat;
+						$longitude2 = $output->results[0]->geometry->location->lng;
+
+					}
+
+
+				}else if($country_code != '' && $country_code != 'NULL'){
+
+					$country_address = strtr($country_code,' ','+');
+
+					$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+					$output= json_decode($geocode);
+
+					$latitude2 = $output->results[0]->geometry->location->lat;
+					$longitude2 = $output->results[0]->geometry->location->lng;
+
+				}
+
+			}else{
+				$latitude2 = NULL;
+				$longitude2 = NULL;
+			}
+
 			$count_stud_dogs_num = $this->pages_model->count_stud_dogs($country_code,$breed_id);
 
 			$config['base_url'] = base_url() . 'stud-dogs?breed_id='.$breed_id;
@@ -1294,7 +1330,7 @@
 			$data['metadescription'] 	= 'Find your perfect stud dog today, FREE to advertise, FREE to join, browse '.$data['breed_info']['name'].' stud dogs now.';
 			$data['metarobots'] 		= '';
 
-			$data['studdogs'] = $this->pages_model->get_stud_dogs($config['per_page'], $offset, $country_code, $breed_id);
+			$data['studdogs'] = $this->pages_model->get_stud_dogs($config['per_page'], $offset, $country_code, $breed_id,$latitude2,$longitude2);
 
 			$this->load->view('templates/header',$data);
 			$this->load->view('pages/stud-dog-breeds',$data);
@@ -1323,6 +1359,42 @@
 			$info = $this->users_model->checkinfo($id);
 			$country_code = $info['post_code'];
 
+			if($this->input->get('distance', TRUE) != '' && $this->input->get('distance', TRUE) != 'all'){
+
+				if($this->input->get('post_code', TRUE) != ''){
+
+					$address = strtr($this->input->get('post_code', TRUE),' ','+');
+
+					$geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+					$output= json_decode($geocode);
+
+					if($output->status != 'ZERO_RESULTS'){
+
+						$latitude2 = $output->results[0]->geometry->location->lat;
+						$longitude2 = $output->results[0]->geometry->location->lng;
+
+					}
+
+
+				}else if($country_code != '' && $country_code != 'NULL'){
+
+					$country_address = strtr($country_code,' ','+');
+
+					$geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$country_address.'&key=AIzaSyCB6W4Aw95lpIiCvNBzCnIw28QXCciURns');
+
+					$output= json_decode($geocode);
+
+					$latitude2 = $output->results[0]->geometry->location->lat;
+					$longitude2 = $output->results[0]->geometry->location->lng;
+
+				}
+
+			}else{
+				$latitude2 = NULL;
+				$longitude2 = NULL;
+			}
+
 			$count_puppies_num = $this->pages_model->count_puppies($country_code,$breed_id);
 
 			$config['base_url'] = base_url() . 'stud-dogs?breed_id='.$breed_id;
@@ -1348,7 +1420,7 @@
 			$data['metadescription'] 	= 'Find your perfect puppy today, FREE to advertise, FREE to join, browse '.$data['breed_info']['name'].' puppies now.';
 			$data['metarobots'] 		= '';
 
-			$data['puppies'] = $this->pages_model->get_puppies($config['per_page'], $offset, $country_code, $breed_id);
+			$data['puppies'] = $this->pages_model->get_puppies($config['per_page'], $offset, $country_code, $breed_id,$latitude2,$longitude2);
 
 			$this->load->view('templates/header',$data);
 			$this->load->view('pages/puppies-breeds',$data);
