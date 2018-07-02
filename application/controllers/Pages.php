@@ -1306,7 +1306,7 @@
 				$longitude2 = NULL;
 			}
 
-			$count_stud_dogs_num = $this->pages_model->count_stud_dogs($country_code,$breed_id);
+			$count_stud_dogs_num = $this->pages_model->count_stud_dogs($country_code,$breed_id,$latitude2,$longitude2);
 
 			$config['base_url'] = base_url() . 'stud-dogs?breed_id='.$breed_id;
 			$config['total_rows'] = $count_stud_dogs_num;
@@ -1395,7 +1395,7 @@
 				$longitude2 = NULL;
 			}
 
-			$count_puppies_num = $this->pages_model->count_puppies($country_code,$breed_id);
+			$count_puppies_num = $this->pages_model->count_puppies($country_code,$breed_id,$latitude2,$longitude2);
 
 			$config['base_url'] = base_url() . 'stud-dogs?breed_id='.$breed_id;
 			$config['total_rows'] = $count_puppies_num;
