@@ -301,7 +301,7 @@
 
 		    		if(!empty($getsub)){
 
-		    			$this->paypal_recurring->change_subscription_status($getsub['paypal_id'],'Cancel');
+		    			$this->paypal_change_subscription->change_subscription_status($getsub['paypal_id'],'Cancel');
 
                         $this->users_model->user_change_plan_delete_user_id($id);
 
@@ -316,7 +316,7 @@
 
 		    		if(!empty($getpsub)){
 		    			
-		    			$this->paypal_recurring->change_subscription_status($getsub['paypal_id'],'Cancel');
+		    			$this->paypal_change_subscription->change_subscription_status($getsub['paypal_id'],'Cancel');
 
                         $this->users_model->user_change_plan_delete_user_id($id);
 

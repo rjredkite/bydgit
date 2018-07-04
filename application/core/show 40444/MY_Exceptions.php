@@ -1,5 +1,5 @@
 <?php 
-   /* class MY_Exceptions extends CI_Exceptions {
+    class MY_Exceptions extends CI_Exceptions {
 
         public function __construct()
         {
@@ -21,4 +21,4 @@
             echo $CI->output->get_output();
             exit;
         }
-    }*/
+    }

@@ -249,7 +249,11 @@
 							<p class="text-right">Owner</p>
 						</div>
 						<div class="col-sm-6">
-							<a href="<?php echo base_url('admin/users/'.$listing['user_id'].'/edit'); ?>"><?php echo $user['email']; ?></a>
+							<?php if($user['email'] != ''){ ?>
+								<a href="<?php echo base_url('admin/users/'.$listing['user_id'].'/edit'); ?>"><?php echo $user['email']; ?></a>
+							<?php }else{ ?>
+								Account Close
+							<?php } ?>
 						</div>
 					</div>
 					<div class="row">

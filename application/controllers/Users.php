@@ -3499,7 +3499,7 @@
 
 
 	    	if($sub){
-	    		$this->paypal_recurring->change_subscription_status($sub['paypal_id'],'Cancel');
+	    		$this->paypal_change_subscription->change_subscription_status($sub['paypal_id'],'Cancel');
             	$this->users_model->user_change_plan_delete_user_id($id);
 	    	}
 	    	

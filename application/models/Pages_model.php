@@ -144,7 +144,11 @@
 			$this->db->order_by('listings.featured', 'DESC');
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
@@ -299,7 +303,11 @@
 			}
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
@@ -476,7 +484,11 @@
 			$this->db->order_by('listings.featured', 'DESC');
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
@@ -630,7 +642,11 @@
 			}
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
@@ -782,7 +798,11 @@
 			$this->db->order_by('featured', 'DESC');
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('featured', 'DESC');
@@ -930,7 +950,11 @@
 			}
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
@@ -1074,7 +1098,11 @@
 			$this->db->order_by('listings.featured', 'DESC');
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
@@ -1220,7 +1248,11 @@
 			}
 	
 			if($this->input->get('sort_by', TRUE) != 'closest'){
-				$this->db->order_by('listings.id', 'DESC');
+				if($latitude2 != '' && $longitude2 != ''){
+					$this->db->select("*, ( 3959 * acos( cos( radians($latitude2) ) * cos( radians( listings.latitude ) ) * cos( radians( listings.longitude ) - radians($longitude2) ) + sin( radians($latitude2) ) * sin( radians( listings.longitude ) ) ) ) AS distance");    
+	               
+					$this->db->order_by('distance');   
+				}
 			}
 
 			$this->db->order_by('listings.featured', 'DESC');
